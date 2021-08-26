@@ -7,9 +7,19 @@ const table_keranjang = [
   ];
 function kurangiPesanan(table_keranjang) {
   let tombolKurangi = true; // Tombol kurangi dipencet
-  for (let itemPembelian of table_keranjang) {
-    if (tombolKurangi) {
-      itemPembelian.jumlah--;
+  let indexArray = 1; // Dari DOM Mungkin posisi table keranjang dalam gambar tampilan web
+  let output = [];
+  if (tombolKurangi) {
+    if (table_keranjang.jumlah[indexArray]-1 == 0) {
+      for (let pesananFixed of table_keranjang) {
+        if (pesananFixed != table_keranjang[indexArray]) {
+          output.push(pesananFixed);
+        }
+      }
+    } else {
+      table_keranjang.jumlah[indexArray]--;
+      return table_keranjang;
     }
   }
+  return output;
 }
