@@ -48,24 +48,24 @@
 
 const table_obat = [
   {
-    id_obat: B1,
-    nama_obat: "panadol",
+    id_obat: 'B1',
+    nama_obat: "Dextromethorphan HBr",
     tipe: "tablet",
     stok: 2,
     harga: 5000,
     // perluResep: false,
   },
   {
-    id_obat: B2,
-    nama_obat: "lansoprazole",
+    id_obat: 'D1',
+    nama_obat: "Paracetamol",
     tipe: "kapsul",
     stok: 10,
     harga: 3000,
     // perluResep: false,
   },
   {
-    id_obat: 3,
-    nama_obat: "enervon-C",
+    id_obat: 'S1',
+    nama_obat: "Enervon-C",
     tipe: "tablet",
     stok: 8,
     harga: 10000,
@@ -75,7 +75,7 @@ const table_obat = [
 
 const table_admin = [
   {
-    username: joko1,
+    username: 'joko1',
     pass: "hacktiv8",
   },
 ];
