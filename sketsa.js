@@ -73,6 +73,22 @@ const table_obat = [
   },
 ];
 
+//Tambah Stok
+function tambahStockObat(tabel_obat, nama_obat, tipe) {
+  for (let value of tabel_obat) {
+    if (nama_obat == value.nama_obat && tipe == value.tipe) {
+      value.stok++;    
+    }
+  }
+  return tabel_obat;
+}
+
+//Login User
+function loginUser() {
+
+}
+//Logout User
+
 const table_admin = [
   {
     username: 'joko1',
@@ -80,18 +96,18 @@ const table_admin = [
   },
 ];
 
-const table_keranjang = [];
+// const table_keranjang = [];
 
-const table_pesanan = [
-  //awalnya kosong
-  {
-    id_pesanan: 01,
-    id_obat: [1, 2], //pakai array aja kali ya? pakai id referensi ke tabel_obat
-    nama_obat: ["nama1", "nama2"],
-    harga_obat: ["harga1", "harga2"],
-    total_harga: 8000, //totalin harga pakai id obat
-    nama_pembeli: "Acit",
-    nolep: 0819,
-    // buktiResepDokter: "gambar.png", //jika ada obat yg perlu resep dokter
-  },
-];
+// const table_pesanan = [
+//   //awalnya kosong
+//   {
+//     id_pesanan: 01,
+//     id_obat: [1, 2], //pakai array aja kali ya? pakai id referensi ke tabel_obat
+//     nama_obat: ["nama1", "nama2"],
+//     harga_obat: ["harga1", "harga2"],
+//     total_harga: 8000, //totalin harga pakai id obat
+//     nama_pembeli: "Acit",
+//     nolep: '081900000'
+//     // buktiResepDokter: "gambar.png", //jika ada obat yg perlu resep dokter
+//   },
+// ];
