@@ -40,10 +40,10 @@ function checkout(namaPembeli, nolep, tableKeranjang, tableObat) {
   output.push(nolep);
   let temp = [];
   for (let pesananFixed of tableKeranjang) {
-    temp.push(table_keranjang.nama_obat_keranjang);
+    temp.push(pesananFixed.nama_obat_keranjang);
     for (let dataObat of tableObat) {
-      if (tableKeranjang.id_obat_keranjang == tableObat.id_obat) {
-        totalHarga += tableObat.harga*tableKeranjang.jumlah;
+      if (pesananFixed.id_obat_keranjang == dataObat.id_obat) {
+        totalHarga += dataObat.harga*pesananFixed.jumlah;
       }
     }
   }
