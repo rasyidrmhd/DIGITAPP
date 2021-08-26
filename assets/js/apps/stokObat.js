@@ -1,7 +1,7 @@
 if (!localStorage.getItem("username")) {
   window.location.href = "login.html";
 }
-localStorage.removeItem("username");
+localStorage.clear();
 
 const table_obat = [
   {
