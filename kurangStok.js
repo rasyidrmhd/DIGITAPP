@@ -33,7 +33,7 @@ function kurangStok(idObat, tabelObat) {
 
   for (let i = 0; i < tabelObat.length; i++) {
     if (idObat === tabelObat[i]['id_obat']) {
-      tabelObat[i]['stok']++
+      tabelObat[i]['stok']--;
     }
     
   }
