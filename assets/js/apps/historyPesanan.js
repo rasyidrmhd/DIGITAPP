@@ -64,6 +64,8 @@ function showHistoryPesanan() {
       tempObj = { id_pesanan, nama_obat, harga_obat, jumlah_obat, total_harga, nama_pembeli, nolep, alamat };
       tabelHistory.push(tempObj);
     }
+
+    localStorage.setItem("tabelHistory", JSON.stringify(tabelHistory));
   }
 
   output = "";

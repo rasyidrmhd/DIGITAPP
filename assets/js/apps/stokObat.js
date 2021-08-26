@@ -80,6 +80,8 @@ function getStok() {
     for (const obat of table_obat) {
       tabelObat.push(obat);
     }
+
+    localStorage.setItem("tabelObat", JSON.stringify(tabelObat));
   }
 
   let no = 1;
