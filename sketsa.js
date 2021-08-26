@@ -42,6 +42,16 @@
  * navbar yang direct ke stock obat, history, dan nambah stock 3
  * stock obat mirip sama halaman utama,
  *
+ * 1. validasi
+ * 2. login admin
+ * 3. halaman utama pengguna
+ * 4. keranjang
+ * 5. invoice
+ *
+ * 6. stock obat Admin
+ * 7. tambah obat
+ * 8. history pesanan
+ *
  *
  *
  */
