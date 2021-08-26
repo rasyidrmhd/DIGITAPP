@@ -8,23 +8,17 @@
     <meta name="author" content="" />
     <title>Login</title>
     <link rel="shortcut icon" type="image/x-icon" href="../assets/img/icon.ico" />
-
-    <!-- Custom fonts for this template-->
     <link href="../assets/vendor/fontawesome-free/css/all.css" rel="stylesheet" type="text/css" />
     <link href="../assets/css/fontfamily.css" rel="stylesheet" type="text/css" />
-
-    <!-- Custom styles for this template-->
     <link href="../assets/css/sb-admin-2.min.css" rel="stylesheet" />
   </head>
 
   <body class="bg-gradient-primary">
     <div class="container">
-      <!-- Outer Row -->
       <div class="row justify-content-center">
         <div class="col-xl-8 col-lg-8 col-md-8">
           <div class="card o-hidden border-0 shadow-lg my-5">
             <div class="card-body p-0">
-              <!-- Nested Row within Card Body -->
               <div class="row">
                 <!-- <div class="col-lg-6 d-none d-lg-block">
                   <img src="assets/img/login.jpg" style="width: 100%; height: 100%" />
@@ -32,10 +26,10 @@
                 <div class="col-lg-12">
                   <div class="p-5">
                     <div class="text-center">
-                      <h1 class="h4 text-gray-900 mb-4">Admin Apotek Kita</h1>
+                      <h1 class="h4 text-gray-900 mb-4"><i class="fas fa-clinic-medical"></i> DIGITAL APPOTEK</h1>
                       <p class="text-danger"></p>
                     </div>
-                    <form class="user" method="POST">
+                    <form class="user" id="login">
                       <div class="form-group">
                         <label for="username">Username</label>
                         <input type="text" class="form-control form-control-user" id="username" autocomplete="off" placeholder="Masukkan Username" name="username" required />
@@ -47,8 +41,8 @@
                           <span id="show" class="input-group-text bg-white" style="border-radius: 0px 50px 50px 0px"><i class="fas fa-eye" id="eye"></i></span>
                         </div>
                       </div>
-                      <a href="stokObat.html" class="btn btn-primary btn-user btn-block">Login</a>
-                      <a href="#" class="btn btn-info btn-user btn-block">Kembali</a>
+                      <button type="submit" class="btn btn-primary btn-user btn-block">Login</button>
+                      <a href="../index.html" class="btn btn-info btn-user btn-block">Kembali</a>
                     </form>
                   </div>
                 </div>
@@ -59,15 +53,11 @@
       </div>
     </div>
 
-    <!-- Bootstrap core JavaScript-->
     <script src="../assets/vendor/jquery/jquery.min.js"></script>
     <script src="../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-    <!-- Core plugin JavaScript-->
     <script src="../assets/vendor/jquery-easing/jquery.easing.min.js"></script>
-
-    <!-- Custom scripts for all pages-->
     <script src="../assets/js/sb-admin-2.min.js"></script>
+    <script src="../assets/js/apps/login.js"></script>
 
     <script>
       var eye = document.getElementById("eye");

@@ -7,11 +7,9 @@
     <meta name="description" content="" />
     <meta name="author" content="" />
     <title>History Pesanan</title>
-    <!-- Custom fonts for this template-->
+    <link rel="shortcut icon" type="image/x-icon" href="../assets/img/icon.ico" />
     <link href="../assets/vendor/fontawesome-free/css/all.css" rel="stylesheet" type="text/css" />
     <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet" />
-
-    <!-- Custom styles for this template-->
     <link href="../assets/css/sb-admin-2.min.css" rel="stylesheet" />
     <link href="../assets/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet" />
   </head>
@@ -26,32 +24,22 @@
           <div class="sidebar-brand-icon">
             <i class="fas fa-clinic-medical"></i>
           </div>
-          <div class="sidebar-brand-text mx-3">APOTEK KITA</div>
+          <div class="sidebar-brand-text mx-3">DIGITAPP</div>
         </a>
-
-        <!-- Divider -->
         <hr class="sidebar-divider my-0" />
-
-        <!-- Nav Item - Dashboard -->
         <li class="nav-item">
           <a class="nav-link" href="stokObat.html">
             <i class="fas fa-fw fa-prescription-bottle-alt"></i>
             <span>Stok Obat</span></a
           >
         </li>
-
-        <!-- Nav Item - Charts -->
         <li class="nav-item active">
           <a class="nav-link" href="historyPesanan.html">
             <i class="fas fa-fw fa-scroll"></i>
             <span>History Pesanan</span></a
           >
         </li>
-
-        <!-- Divider -->
         <hr class="sidebar-divider d-none d-md-block" />
-
-        <!-- Sidebar Toggler (Sidebar) -->
         <div class="text-center d-none d-md-inline">
           <button class="rounded-circle border-0" id="sidebarToggle"></button>
         </div>
@@ -69,46 +57,13 @@
               <i class="fa fa-bars"></i>
             </button>
 
-            <!-- Topbar Search -->
-            <!-- <form class="d-none d-sm-inline-block form-inline mr-auto ml-md-3 my-2 my-md-0 mw-100 navbar-search">
-              <div class="input-group">
-                <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2" />
-                <div class="input-group-append">
-                  <button class="btn btn-primary" type="button">
-                    <i class="fas fa-search fa-sm"></i>
-                  </button>
-                </div>
-              </div>
-            </form> -->
-
             <!-- Topbar Navbar -->
             <ul class="navbar-nav ml-auto">
-              <!-- Nav Item - Search Dropdown (Visible Only XS) -->
-              <!-- <li class="nav-item dropdown no-arrow d-sm-none">
-                <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  <i class="fas fa-search fa-fw"></i>
-                </a>
-                <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in" aria-labelledby="searchDropdown">
-                  <form class="form-inline mr-auto w-100 navbar-search">
-                    <div class="input-group">
-                      <input type="text" class="form-control bg-light border-0 small" placeholder="Search for..." aria-label="Search" aria-describedby="basic-addon2" />
-                      <div class="input-group-append">
-                        <button class="btn btn-primary" type="button">
-                          <i class="fas fa-search fa-sm"></i>
-                        </button>
-                      </div>
-                    </div>
-                  </form>
-                </div>
-              </li> -->
-
-              <!-- Nav Item - User Information -->
               <li class="nav-item dropdown no-arrow">
                 <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  <span class="mr-2 d-none d-lg-inline text-gray-600 small">Admin</span>
+                  <span class="mr-2 d-none d-lg-inline text-gray-600 small" id="displayName">Admin</span>
                   <img class="img-profile rounded-circle" src="../assets/img/profile/default.png" />
                 </a>
-                <!-- Dropdown - User Information -->
                 <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
                   <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
                     <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
@@ -122,7 +77,6 @@
 
           <!-- Begin Page Content -->
           <div class="container-fluid">
-            <!-- Page Heading -->
             <div class="d-sm-flex align-items-center justify-content-between mb-4">
               <h1 class="h3 mb-0 text-gray-800">History Pesanan</h1>
             </div>
@@ -134,7 +88,6 @@
                   <!-- <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                     <h6 class="m-0 font-weight-bold text-primary">History Pesanan</h6>
                   </div> -->
-                  <!-- Card Body -->
                   <div class="card-body">
                     <div class="table-responsive">
                       <table class="table table-striped" id="dataTable" width="100%" cellspacing="0">
@@ -148,16 +101,7 @@
                             <th>Total Harga</th>
                           </tr>
                         </thead>
-                        <tbody>
-                          <!-- <tr class="text-center">
-                            <td class="align-middle">1</td>
-                            <td class="align-middle text-left">Panadol</td>
-                            <td class="align-middle text-left">Panadol</td>
-                            <td class="align-middle">Tablet</td>
-                            <td class="align-middle">10</td>
-                            <td class="align-middle">5000</td>
-                          </tr> -->
-                        </tbody>
+                        <tbody id="tbody"></tbody>
                       </table>
                     </div>
                   </div>
@@ -168,16 +112,6 @@
           <!-- /.container-fluid -->
         </div>
         <!-- End of Main Content -->
-
-        <!-- Footer -->
-        <footer class="sticky-footer bg-white">
-          <div class="container my-auto">
-            <div class="copyright text-center my-auto">
-              <!-- <span>Copyright &copy; Your Website 2019</span> -->
-            </div>
-          </div>
-        </footer>
-        <!-- End of Footer -->
       </div>
       <!-- End of Content Wrapper -->
     </div>
@@ -188,7 +122,6 @@
       <i class="fas fa-angle-up"></i>
     </a>
 
-    <!-- Logout Modal-->
     <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -200,23 +133,19 @@
           </div>
           <div class="modal-footer">
             <button class="btn btn-secondary" type="button" data-dismiss="modal">Tidak</button>
-            <a class="btn btn-danger" href="login.html">Ya</a>
+            <a class="btn btn-danger" onclick="logoutUser()" href="#">Ya</a>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- Bootstrap core JavaScript-->
     <script src="../assets/vendor/jquery/jquery.min.js"></script>
     <script src="../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-    <!-- Core plugin JavaScript-->
     <script src="../assets/vendor/jquery-easing/jquery.easing.min.js"></script>
-
-    <!-- Custom scripts for all pages-->
     <script src="../assets/js/sb-admin-2.min.js"></script>
     <script src="../assets/vendor/datatables/jquery.dataTables.min.js"></script>
     <script src="../assets/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+    <script src="../assets/js/apps/historyPesanan.js"></script>
 
     <script>
       $(document).ready(function () {
