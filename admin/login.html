@@ -10,7 +10,7 @@
     <link rel="shortcut icon" type="image/x-icon" href="../assets/img/icon.ico" />
 
     <!-- Custom fonts for this template-->
-    <link href="../assets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css" />
+    <link href="../assets/vendor/fontawesome-free/css/all.css" rel="stylesheet" type="text/css" />
     <link href="../assets/css/fontfamily.css" rel="stylesheet" type="text/css" />
 
     <!-- Custom styles for this template-->
@@ -35,7 +35,7 @@
                       <h1 class="h4 text-gray-900 mb-4">Admin Apotek Kita</h1>
                       <p class="text-danger"></p>
                     </div>
-                    <form class="user" method="POST" action="stockObat.html">
+                    <form class="user" method="POST" action="">
                       <div class="form-group">
                         <label for="username">Username</label>
                         <input type="text" class="form-control form-control-user" id="username" autocomplete="off" placeholder="Masukkan Username" name="username" required />
@@ -44,10 +44,10 @@
                       <div class="input-group mb-3">
                         <input id="pass" type="password" autocomplete="off" class="form-control form-control-user" name="password" placeholder="Masukkan Password" required />
                         <div class="input-group-append">
-                          <span id="show" class="input-group-text bg-white" style="border-radius: 0px 50px 50px 0px"><i id="eye" class="fas fa-fw fa-eye"></i></span>
+                          <span id="show" class="input-group-text bg-white" style="border-radius: 0px 50px 50px 0px"><i class="fas fa-eye" id="eye"></i></span>
                         </div>
                       </div>
-                      <button class="btn btn-primary btn-user btn-block">Login</button>
+                      <a href="stokObat.html" class="btn btn-primary btn-user btn-block">Login</a>
                       <a href="#" class="btn btn-info btn-user btn-block">Kembali</a>
                     </form>
                   </div>
@@ -74,10 +74,10 @@
       $("#show").on("click", function () {
         if ($("#pass").attr("type") == "password") {
           $("#pass").attr("type", "text");
-          eye.className = "fas fa-fw fa-eye-slash";
+          eye.className = "fas fa-eye-slash";
         } else {
           $("#pass").attr("type", "password");
-          eye.className = "fas fa-fw fa-eye";
+          eye.className = "fas fa-eye";
         }
       });
     </script>
