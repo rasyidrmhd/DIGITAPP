@@ -2,19 +2,6 @@ if (!localStorage.getItem("username")) {
   window.location.href = "login.html";
 }
 
-// const table_pesanan = [
-//   //awalnya kosong
-//   {
-//     id_pesanan: "P1",
-//     id_obat: ["B2", "B3"], //pakai array aja kali ya? pakai id referensi ke tabel_obat
-//     // nama_obat: ["nama1", "nama2"],
-//     // harga_obat: ["harga1", "harga2"],
-//     // total_harga: 8000, //totalin harga pakai id obat
-//     nama_pembeli: "Acit",
-//     alamat: "Ujungberung",
-//     nolep: 0819,
-//   },
-// ];
 const table_pesanan = [
   {
     id_pesanan: "P1",
@@ -39,7 +26,7 @@ function showHistoryPesanan() {
   if (localStorage.getItem("tabelHistory")) {
     tabelHistory = JSON.parse(localStorage.getItem("tabelHistory"));
   } else {
-    let tabelObat = JSON.parse(localStorage.getItem("tabelObat"));
+    tabelObat = JSON.parse(localStorage.getItem("tabelObat"));
     for (const pesanan of table_pesanan) {
       let tempObj = {};
       let id_pesanan = pesanan.id_pesanan;
