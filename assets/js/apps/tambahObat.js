@@ -66,6 +66,7 @@ function tambahObatBaru(namaObat, tipeObat, jenisObat, hargaObat, stokObat, tabe
     tipe: tipeObat,
     stok: Number(stokObat),
     harga: Number(hargaObat),
+    src: "default.jpg",
   };
 
   tabel.push(tempObj);
