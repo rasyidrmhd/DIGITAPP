@@ -17,9 +17,9 @@ const table_pesanan = [
 ];
 
 let tabelHistory = [];
+document.getElementById("displayName").textContent = localStorage.getItem("username") + " (Admin)";
 let tbody = document.getElementById("tbody");
 let output = "";
-document.getElementById("displayName").textContent = localStorage.getItem("username") + " (Admin)";
 showHistoryPesanan();
 
 function showHistoryPesanan() {
@@ -66,9 +66,6 @@ function showHistoryPesanan() {
     for (let j = 0; j < tabelHistory[i].nama_obat.length; j++) {
       output += `${j + 1}. ${tabelHistory[i].nama_obat[j]} = ${tabelHistory[i].harga_obat[j]} x ${tabelHistory[i].jumlah_obat[j]}<br>`;
     }
-    // for (const obat of history[i].nama_obat) {
-    //   output += `${obat} ${history[i]}`;
-    // }
     output += "  </td>";
     output += "  <td class='align-middle'>" + tabelHistory[i].total_harga + "</td>";
     output += "</tr>";
@@ -76,16 +73,6 @@ function showHistoryPesanan() {
 
   tbody.innerHTML = output;
   console.log(tabelHistory);
-
-  //   tempObj = {
-  //     idPesanan: table_pesanan[0]["id_pesanan"],
-  //     totalHarga: table_pesanan[0]["total_harga"],
-  //     namaPembeli: table_pesanan[0]["nama_pembeli"],
-  //     alamat: table_pesanan[0]["alamat"],
-  //     noTelp: table_pesanan[0]["nolep"],
-  //   };
-
-  //   tabelHistory.push(tempObj);
 }
 
 function logoutUser() {

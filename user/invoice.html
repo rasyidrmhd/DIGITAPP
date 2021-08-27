@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>Lobby</title>
+    <link rel="shortcut icon" type="image/x-icon" href="../assets/img/icon.ico" />
+    <link href="../assets/vendor/fontawesome-free/css/all.css" rel="stylesheet" type="text/css" />
+    <link href="../assets/css/fontfamily.css" rel="stylesheet" type="text/css" />
+    <link href="../assets/css/sb-admin-2.min.css" rel="stylesheet" />
+    <link href="../assets/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-white topbar mb-4 fixed-top shadow">
+      <div class="sidebar-brand-icon text-primary">
+        <i class="fas fa-clinic-medical"></i>
+      </div>
+      <a class="navbar-brand text-primary" href="../index.html">&nbsp;DIGITAL APPOTEK</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ml-auto">
+            <a href="#" onclick="" data-target="#keranjang" data-toggle="modal" class="nav-link" id="logoKeranjang">0 <i class="fas fa-shopping-cart"></i></a>
+          </li>
+        </ul>
+        <!-- <form class="form-inline my-2 my-lg-0">
+          <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" />
+          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form> -->
+      </div>
+
+    </nav>
+
+    <div class="container-fluid" style="padding-top: 80px;">
+        <h1 class="text-center">Terimakasih telah memesan di DIGITAL APPOTEK</h1>
+        <div class="table-responsive">
+            <table class="table table-striped" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                <tr class="align-middle text-center">
+                    <th>Pembeli</th>
+                    <th>Telepon</th>
+                    <th>Alamat</th>
+                    <th>Pesanan</th>
+                    <th>Total Harga</th>
+                </tr>
+                </thead>
+                <tbody id="tbody"></tbody>
+            </table>
+        </div>
+        <a href="../index.html" class="btn btn-primary btn-block">Kembali ke beranda</a>
+    </div>
+
+    <script src="../assets/vendor/jquery/jquery.min.js"></script>
+    <script src="../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="../assets/vendor/jquery-easing/jquery.easing.min.js"></script>
+    <script src="../assets/js/sb-admin-2.min.js"></script>
+    <script src="../assets/vendor/datatables/jquery.dataTables.min.js"></script>
+    <script src="../assets/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+    <script src="../assets/js/apps/invoice.js"></script>
+  </body>
+</html>

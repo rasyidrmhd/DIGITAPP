@@ -175,9 +175,8 @@ function pesanObat(idObat) {
   for (let i = 0; i < tabelKeranjang.length; i++) {
     if (idObat === tabelKeranjang[i]["id_obat_keranjang"]) {
       sudahAdaDiKerajang = true;
+      tabelKeranjang[i]["jumlah"]++;
     }
-
-    tabelKeranjang[i]["jumlah"]++;
   }
 
   // kalo dikeranjang blm ada barangnya, buat entry baru
@@ -195,6 +194,8 @@ function pesanObat(idObat) {
   tabelObat[indexTerpilih]["stok"]--;
 
   localStorage.setItem("tabelKeranjang", JSON.stringify(tabelKeranjang));
+  localStorage.setItem("tabelObat", JSON.stringify(tabelObat));
+  getKeranjang();
 }
 
 function getKeranjang() {
@@ -237,29 +238,24 @@ function getKeranjang() {
   document.getElementById("totalKeranjang").innerHTML = formatter.format(totalHarga);
   document.getElementById("logoKeranjang").innerHTML = tabelKeranjang.length + " <i class='fas fa-shopping-cart'></i>";
   tbody.innerHTML = outputKeranjang;
-  
 }
-
-document.getElementById("formKeranjang").addEventListener("submit", function () {
-  alert("Checkout");
-});
 
 function kurangJumlahKeranjang(idObat) {
   let indexTerpilih;
 
   for (let i = 0; i < tabelKeranjang.length; i++) {
     if (idObat === tabelKeranjang[i]["id_obat_keranjang"]) {
+      indexTerpilih = i;
       if (tabelKeranjang[i]["jumlah"] === 1) {
+        tabelObat[indexTerpilih]["stok"]++;
         hapusDariKeranjang(idObat);
         break;
       }
 
       tabelKeranjang[i]["jumlah"]--;
-      indexTerpilih = i;
+      tabelObat[indexTerpilih]["stok"]++;
     }
   }
-
-  tabelObat[indexTerpilih]["stok"]++;
 
   localStorage.setItem("tabelKeranjang", JSON.stringify(tabelKeranjang));
   localStorage.setItem("tabelObat", JSON.stringify(tabelObat));
@@ -275,22 +271,14 @@ function tambahJumlahKeranjang(idObat) {
       tabelKeranjang[i]["jumlah"]++;
       indexTerpilih = i;
 
-      if (tabelObat[indexTerpilih]["stok"] === 0) {
-        const tombolTambahKeranjang = document.getElementById("buttonTambahKeranjang");
-        tombolTambahKeranjang.disabled = true;
+      if (tabelObat[indexTerpilih]["stok"] < 1) {
+        alert("Stok sudah melewati batas");
+        tabelKeranjang[i]["jumlah"]--;
       } else {
         tabelObat[indexTerpilih]["stok"]--;
       }
     }
   }
-
-  // cek stok di tabel obat
-  // if (tabelObat[indexTerpilih]["stok"] === 1) {
-  //   const tombolTambahKeranjang = document.getElementById("buttonTambahKeranjang");
-  //   tombolTambahKeranjang.disabled = true;
-  // } else {
-  //   tabelObat[indexTerpilih]["stok"]--;
-  // }
 
   localStorage.setItem("tabelKeranjang", JSON.stringify(tabelKeranjang));
   localStorage.setItem("tabelObat", JSON.stringify(tabelObat));
@@ -301,10 +289,10 @@ function hapusDariKeranjang(idObat) {
   let indexTerpilih;
 
   for (let i = 0; i < tabelKeranjang.length; i++) {
-    if (idObat === tabelKeranjang[i]['id_obat_keranjang']) {
+    if (idObat === tabelKeranjang[i]["id_obat_keranjang"]) {
       indexTerpilih = i;
     }
-  } 
+  }
 
   // hapus id tersebut
   if (indexTerpilih > -1) {
@@ -324,14 +312,148 @@ function checkStock(idObat) {
 
   // loop tabel obat
   for (let i = 0; i < tabelObat.length; i++) {
-    if (idObat === tabelObat[i]['id_obat']) {
+    if (idObat === tabelObat[i]["id_obat"]) {
       indexTerpilih = i;
     }
   }
 
-  if (tabelObat[indexTerpilih]['stok'] === 0) {
+  if (tabelObat[indexTerpilih]["stok"] === 0) {
     sudahKosong = true;
   }
 
   return sudahKosong;
 }
+
+document.getElementById("formKeranjang").addEventListener("submit", function (e) {
+  e.preventDefault();
+  let nama = document.getElementById("namaCheckout").value;
+  let alamat = document.getElementById("alamatCheckout").value;
+  let nolep = document.getElementById("nolepCheckout").value;
+  let tabelCheckout = JSON.parse(localStorage.getItem("tabelKeranjang"));
+
+  let tabelObat = JSON.parse(localStorage.getItem("tabelObat"));
+  let tabelHistory = JSON.parse(localStorage.getItem("tabelHistory"));
+  let tempObj = {};
+  let idPesanan = 0;
+  let pesananCount = 1;
+  let idObat = [];
+  let namaObat = [];
+  let hargaObat = [];
+  let jumlahObat = [];
+
+  // untuk menentukan id pesanan
+  if (!tabelHistory) {
+    idPesanan = "P1";
+    tabelHistory = [];
+  } else {
+    for (let i = 0; i < tabelHistory.length; i++) {
+      pesananCount++;
+
+      if (i === tabelHistory.length - 1) {
+        break;
+      }
+    }
+
+    idPesanan = "P" + pesananCount;
+    pesananCount = 1;
+  }
+
+  // looping tabel keranjang utk masukin ke array id_obat, nama_obat
+  for (let i = 0; i < tabelCheckout.length; i++) {
+    // masukin ke array id obat
+    idObat.push(tabelCheckout[i]["id_obat_keranjang"]);
+    namaObat.push(tabelCheckout[i]["nama_obat_keranjang"]);
+    jumlahObat.push(tabelCheckout[i]["jumlah"]);
+    for (let j = 0; j < tabelObat.length; j++) {
+      if (tabelCheckout[i]["id_obat_keranjang"] === tabelObat[j]["id_obat"]) {
+        hargaObat.push(tabelObat[j]["harga"]);
+      }
+    }
+  }
+
+  let totalHarga = 0;
+  for (let i = 0; i < hargaObat.length; i++) {
+    totalHarga += hargaObat[i];
+  }
+
+  tempObj = {
+    id_pesanan: idPesanan,
+    id_obat: idObat,
+    nama_obat: namaObat,
+    harga_obat: hargaObat,
+    jumlah_obat: jumlahObat,
+    total_harga: totalHarga,
+    nama_pembeli: nama,
+    alamat: alamat,
+    nolep: nolep,
+  };
+
+  tabelHistory.push(tempObj);
+  localStorage.removeItem("tabelKeranjang");
+  localStorage.setItem("tabelHistory", JSON.stringify(tabelHistory));
+  window.location.href = "invoice.html";
+});
+
+// function checkOut(namaPembeli, alamatPembeli, noTelp, tabelKeranjang) {
+//   let tabelObat = JSON.parse(localStorage.getItem("tabelObat"));
+//   let tabelHistory = JSON.parse(localStorage.getItem("tabelHistory"));
+//   let tempObj = {};
+//   let idPesanan = 0;
+//   let pesananCount = 1;
+//   // let idObat = [];
+//   let namaObat = [];
+//   let hargaObat = [];
+//   let jumlahObat = [];
+
+//   // untuk menentukan id pesanan
+//   if (tabelHistory.length === 0) {
+//     idPesanan = "P1";
+//   } else {
+//     for (let i = 0; i < tabelHistory.length; i++) {
+//       pesananCount++;
+
+//       if (i === tabelHistory.length - 1) {
+//         break;
+//       }
+//     }
+
+//     idPesanan = "P" + pesananCount;
+//     pesananCount = 1;
+//   }
+
+//   // looping tabel keranjang utk masukin ke array id_obat, nama_obat
+//   for (let i = 0; i < tabelKeranjang.length; i++) {
+//     // masukin ke array id obat
+//     // idObat.push(tabelKeranjang[i]["id_obat_keranjang"]);
+//     namaObat.push(tabelKeranjang[i]["nama_obat_keranjang"]);
+//     jumlahObat.push(tabelKeranjang[i]["jumlah"]);
+//     for (let j = 0; j < tabelObat.length; j++) {
+//       if (tabelKeranjang[i]["id_obat_keranjang"] === tabelObat[j]["id_obat"]) {
+//         hargaObat.push(tabelObat[j]["harga"]);
+//       }
+//     }
+//   }
+
+//   let totalHarga = 0;
+//   for (let i = 0; i < hargaObat.length; i++) {
+//     totalHarga += hargaObat[i];
+//   }
+
+//   tempObj = {
+//     id_pesanan: idPesanan,
+//     nama_obat: namaObat,
+//     harga_obat: hargaObat,
+//     jumlah_obat: jumlahObat,
+//     total_harga: totalHarga,
+//     nama_pembeli: namaPembeli,
+//     alamat: alamatPembeli,
+//     nolep: noTelp,
+//   };
+
+//   tabelHistory.push(tempObj);
+//   localStorage.removeItem("tabelKeranjang");
+//   localStorage.setItem("tabelHistory", JSON.stringify(tabelHistory));
+//   window.location.href = "invoice.html";
+//   // window.location.href = "./index.html";
+//   // return tabelPesanan;
+// }
