@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>Lobby</title>
+    <link rel="shortcut icon" type="image/x-icon" href="./assets/img/icon.ico" />
+    <link href="../assets/vendor/fontawesome-free/css/all.css" rel="stylesheet" type="text/css" />
+    <link href="../assets/css/fontfamily.css" rel="stylesheet" type="text/css" />
+    <link href="../assets/css/sb-admin-2.min.css" rel="stylesheet" />
+    <link href="../assets/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet" />
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-white topbar mb-4 fixed-top shadow">
+      <div class="sidebar-brand-icon text-primary">
+        <i class="fas fa-clinic-medical"></i>
+      </div>
+      <a class="navbar-brand text-primary" href="../index.html">&nbsp;DIGITAL APPOTEK</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ml-auto">
+            <a href="#" data-target="#keranjang" data-toggle="modal" class="nav-link">0 <i class="fas fa-shopping-cart"></i></a>
+          </li>
+        </ul>
+        <!-- <form class="form-inline my-2 my-lg-0">
+          <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" />
+          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form> -->
+      </div>
+
+    </nav>
+
+    <div class="container-fluid" style="padding-top: 80px;">
+        <div class="d-flex flex-row flex-wrap justify-content-center" id="cardObat">
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="keranjang" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Keranjang Anda</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <form id="formKeranjang">
+            <div class="modal-body">
+              <div class="table-responsive">
+                <table class="table table-striped" id="dataTable" width="100%" cellspacing="0">
+                  <thead>
+                    <tr class="align-middle text-center">
+                      <th style="width: 10%">No</th>
+                      <th>Nama</th>
+                      <th>Jenis</th>
+                      <th>Tipe</th>
+                      <th>Stok</th>
+                      <th>Harga</th>
+                      <th>Aksi</th>
+                    </tr>
+                  </thead>
+                  <tbody id="tbody"></tbody>
+                  <tfoot>
+                    <tr>
+                      <td class="text-center" colspan="5">Total Harga</td>
+                      <td class="text-center">0</td>
+                    </tr>
+                  </tfoot>
+                </table>
+              </div>
+            </div>
+            <div class="form-group container">
+              <label for="nama">Nama</label>
+              <input type="text" class="form-control form-control-user" id="nama" autocomplete="off" placeholder="Masukkan Nama" name="nama" required />
+            </div>
+            <div class="form-group container">
+              <label for="alamat">Alamat</label>
+              <input type="text" class="form-control form-control-user" id="alamat" autocomplete="off" placeholder="Masukkan Alamat" name="alamat" required />
+            </div>
+            <div class="form-group container-fluid">
+              <label for="nolep">No Telepon</label>
+              <input type="number" class="form-control form-control-user" id="nolep" autocomplete="off" placeholder="Masukkan No Telepon" name="nolep" required />
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+              <button type="submit" class="btn btn-primary">Checkout</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <script src="../assets/vendor/jquery/jquery.min.js"></script>
+    <script src="../assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="../assets/vendor/jquery-easing/jquery.easing.min.js"></script>
+    <script src="../assets/js/sb-admin-2.min.js"></script>
+    <script src="../assets/vendor/datatables/jquery.dataTables.min.js"></script>
+    <script src="../assets/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+    <script src="../assets/js/apps/listObat.js"></script>
+    <script>
+      $(document).ready(function () {
+        $("#dataTable").DataTable();
+      });
+    </script>
+  </body>
+</html>
