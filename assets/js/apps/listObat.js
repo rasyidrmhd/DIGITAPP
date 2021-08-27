@@ -154,7 +154,8 @@ function getStok() {
 // const table_keranjang = [];
 
 let tabelKeranjang = [];
-let outputKeranjang = "";
+let outputKeranjang = " ";
+getKeranjang();
 
 function pesanObat(idObat) {
   // alert(idObat);
@@ -197,6 +198,7 @@ function pesanObat(idObat) {
 }
 
 function getKeranjang() {
+  outputKeranjang = "";
   if (localStorage.getItem("tabelKeranjang")) {
     tabelKeranjang = JSON.parse(localStorage.getItem("tabelKeranjang"));
   }
@@ -215,13 +217,13 @@ function getKeranjang() {
           <td class="align-middle">${obat.tipe}</td>
           <td class="align-middle">
             <div class="btn-group" role="group">
-              <button type="button" onclick="kurangStok('')" class="btn btn-success btn-sm"><i class="fas fa-minus"></i></button>
+              <button type="button" onclick="kurangJumlahKeranjang('${obat.id_obat}')" class="btn btn-success btn-sm"><i class="fas fa-minus"></i></button>
               <button type="button" class="btn btn-light btn-sm" disabled>${item.jumlah}</button>
-              <button type="button" onclick="tambahStok('')" class="btn btn-success btn-sm"><i class="fas fa-plus"></i></button></td>
+              <button type="button" id="buttonTambahKeranjang" onclick="tambahJumlahKeranjang('${obat.id_obat}')" class="btn btn-success btn-sm"><i class="fas fa-plus"></i></button></td>
             </div>
           <td class="align-middle">${formatter.format(obat.harga)}</td>
           <td class="align-middle">
-            <button onclick="hapusObat('', '')" class="btn btn-danger btn-circle">
+            <button onclick="hapusDariKeranjang('${obat.id_obat}')" class="btn btn-danger btn-circle">
               <i class="fa fa-fw fa-trash"></i>
             </button>
           </td>
@@ -232,20 +234,104 @@ function getKeranjang() {
 
     no++;
   }
-
-  tbody.innerHTML = outputKeranjang;
   document.getElementById("totalKeranjang").innerHTML = formatter.format(totalHarga);
   document.getElementById("logoKeranjang").innerHTML = tabelKeranjang.length + " <i class='fas fa-shopping-cart'></i>";
+  tbody.innerHTML = outputKeranjang;
+  
 }
 
 document.getElementById("formKeranjang").addEventListener("submit", function () {
   alert("Checkout");
 });
 
-function kurangJumlahKeranjang(idObat, tabelKeranjang) {
+function kurangJumlahKeranjang(idObat) {
+  let indexTerpilih;
+
   for (let i = 0; i < tabelKeranjang.length; i++) {
     if (idObat === tabelKeranjang[i]["id_obat_keranjang"]) {
+      if (tabelKeranjang[i]["jumlah"] === 1) {
+        hapusDariKeranjang(idObat);
+        break;
+      }
+
       tabelKeranjang[i]["jumlah"]--;
+      indexTerpilih = i;
     }
   }
+
+  tabelObat[indexTerpilih]["stok"]++;
+
+  localStorage.setItem("tabelKeranjang", JSON.stringify(tabelKeranjang));
+  localStorage.setItem("tabelObat", JSON.stringify(tabelObat));
+  getKeranjang();
+  checkStock(idObat);
+}
+
+function tambahJumlahKeranjang(idObat) {
+  let indexTerpilih;
+
+  for (let i = 0; i < tabelKeranjang.length; i++) {
+    if (idObat === tabelKeranjang[i]["id_obat_keranjang"]) {
+      tabelKeranjang[i]["jumlah"]++;
+      indexTerpilih = i;
+
+      if (tabelObat[indexTerpilih]["stok"] === 0) {
+        const tombolTambahKeranjang = document.getElementById("buttonTambahKeranjang");
+        tombolTambahKeranjang.disabled = true;
+      } else {
+        tabelObat[indexTerpilih]["stok"]--;
+      }
+    }
+  }
+
+  // cek stok di tabel obat
+  // if (tabelObat[indexTerpilih]["stok"] === 1) {
+  //   const tombolTambahKeranjang = document.getElementById("buttonTambahKeranjang");
+  //   tombolTambahKeranjang.disabled = true;
+  // } else {
+  //   tabelObat[indexTerpilih]["stok"]--;
+  // }
+
+  localStorage.setItem("tabelKeranjang", JSON.stringify(tabelKeranjang));
+  localStorage.setItem("tabelObat", JSON.stringify(tabelObat));
+  getKeranjang();
+}
+
+function hapusDariKeranjang(idObat) {
+  let indexTerpilih;
+
+  for (let i = 0; i < tabelKeranjang.length; i++) {
+    if (idObat === tabelKeranjang[i]['id_obat_keranjang']) {
+      indexTerpilih = i;
+    }
+  } 
+
+  // hapus id tersebut
+  if (indexTerpilih > -1) {
+    tabelKeranjang.splice(indexTerpilih, 1);
+  }
+
+  localStorage.setItem("tabelKeranjang", JSON.stringify(tabelKeranjang));
+  getKeranjang();
+}
+
+function checkStock(idObat) {
+  /**cek untuk toggle display tombol '+'
+   * jika stok obat uda 0, return flag sudahKosong = true
+   */
+  let sudahKosong = false;
+  let indexTerpilih;
+
+  // loop tabel obat
+  for (let i = 0; i < tabelObat.length; i++) {
+    if (idObat === tabelObat[i]['id_obat']) {
+      indexTerpilih = i;
+    }
+  }
+
+  if (tabelObat[indexTerpilih]['stok'] === 0) {
+    sudahKosong = true;
+  }
+
+  return sudahKosong;
 }
