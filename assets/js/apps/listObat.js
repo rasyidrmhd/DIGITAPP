@@ -110,9 +110,19 @@ const table_obat = [
   },
 ];
 
+const table_keranjang = [
+  {
+    id_obat_keranjang: 'S5',
+    nama_obat_keranjang: 'imboost',
+    jumlah: 5,
+  }
+];
+
+let tbody = document.getElementById("tbody");
 let cardObat = document.getElementById("cardObat");
 let output = "";
 let tabelObat = [];
+let tabelKeranjang = [];
 
 let formatter = new Intl.NumberFormat("en-us", {
   style: "currency",
@@ -120,6 +130,7 @@ let formatter = new Intl.NumberFormat("en-us", {
 });
 
 getStok();
+getKeranjang();
 
 function getStok() {
   if (localStorage.getItem("tabelObat")) {
@@ -150,45 +161,86 @@ function getStok() {
   cardObat.innerHTML = output;
 }
 
-function pesanObat(idObat, tabelKeranjang, tabelObat) {
-  alert(idObat);
-  //   let sudahAdaDiKerajang = false;
-  //   let tempObj = {};
-  //   let indexTerpilih;
+function pesanObat(idObat) {
+  // alert(idObat);
+    let sudahAdaDiKerajang = false;
+    let tempObj = {};
+    let indexTerpilih;
 
-  //   // cari id obat dulu
-  //   for (let i = 0; i < tabelObat.length; i++) {
-  //     if (idObat === tabelObat[i]["id_obat"]) {
-  //       indexTerpilih = i;
-  //     }
-  //   }
+    // cari id obat dulu
+    for (let i = 0; i < tabelObat.length; i++) {
+      if (idObat === tabelObat[i]["id_obat"]) {
+        indexTerpilih = i;
+      }
+    }
 
-  //   // traverse tabel keranjang, kalo uda ada, tambah jumlah aja, kalo belum baru push baru
-  //   for (let i = 0; i < tabelKeranjang.length; i++) {
-  //     if (idObat === tabelKeranjang[i]["id_obat_keranjang"]) {
-  //       sudahAdaDiKerajang = true;
-  //     }
+    // traverse tabel keranjang, kalo uda ada, tambah jumlah aja, kalo belum baru push baru
+    for (let i = 0; i < tabelKeranjang.length; i++) {
+      if (idObat === tabelKeranjang[i]["id_obat_keranjang"]) {
+        sudahAdaDiKerajang = true;
+      }
 
-  //     tabelKeranjang[i]["jumlah"]++;
-  //   }
+      tabelKeranjang[i]["jumlah"]++;
+    }
 
-  //   // kalo dikeranjang blm ada barangnya, buat entry baru
-  //   if (!sudahAdaDiKerajang) {
-  //     tempObj = {
-  //       id_obat_keranjang: tabelObat[indexTerpilih]["id_obat"],
-  //       nama_obat_keranjang: tabelObat[indexTerpilih]["nama_obat"],
-  //       jumlah: 1,
-  //     };
+    // kalo dikeranjang blm ada barangnya, buat entry baru
+    if (!sudahAdaDiKerajang) {
+      tempObj = {
+        id_obat_keranjang: tabelObat[indexTerpilih]["id_obat"],
+        nama_obat_keranjang: tabelObat[indexTerpilih]["nama_obat"],
+        jumlah: 1,
+      };
 
-  //     tabelKeranjang.push(tempObj);
-  //   }
+      tabelKeranjang.push(tempObj);
+    }
 
-  //   // kurangi stok setelah masuk ke keranjang
-  //   tabelObat[indexTerpilih]["stok"]--;
+    // kurangi stok setelah masuk ke keranjang
+    tabelObat[indexTerpilih]["stok"]--;
 
-  //   return tabelKeranjang;
+    localStorage.setItem("tabelKeranjang", JSON.stringify(tabelKeranjang));
+}
+
+function getKeranjang() {
+  if (localStorage.getItem("tabelKeranjang")) {
+    tabelKeranjang = JSON.parse(localStorage.getItem("tabelKeranjang"));
+  } else {
+    for (const item of table_keranjang) {
+      tabelKeranjang.push(item);
+    }
+
+    localStorage.setItem("tabelKeranjang", JSON.stringify(tabelKeranjang));
+  }
+
+  let no = 1;
+  for (const item of tabelKeranjang) {
+    output += `
+      <tr class="text-center">
+      <td class="align-middle">${no}</td>
+      <td class="align-middle text-left">${item.nama_obat_keranjang}</td>
+      <td class="align-middle"> </td>
+      <td class="align-middle"> </td>
+      <td class="align-middle">
+        <div class="btn-group" role="group">
+          <button type="button" onclick="kurangStok('')" class="btn btn-success btn-sm"><i class="fas fa-minus"></i></button> 
+          <button type="button" class="btn btn-light btn-sm" disabled>${item.jumlah}</button>
+          <button type="button" onclick="tambahStok('')" class="btn btn-success btn-sm"><i class="fas fa-plus"></i></button></td>
+        </div>
+      <td class="align-middle"></td>
+      <td class="align-middle">
+        <button onclick="hapusObat('', '')" class="btn btn-danger btn-circle">
+          <i class="fa fa-fw fa-trash"></i>
+        </button>
+      </td>
+    </tr>`;
+
+    no++;
+  }
+
+  tbody.innerHTML = output;
 }
 
 document.getElementById("formKeranjang").addEventListener("submit", function () {
   alert("Checkout");
 });
+
+// document.getElementById("logoKeranjang").textContent = tabelKeranjang.length;
