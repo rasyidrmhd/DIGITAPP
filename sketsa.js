@@ -58,24 +58,24 @@
 
 const table_obat = [
   {
-    id_obat: B1,
-    nama_obat: "panadol",
+    id_obat: 'B1',
+    nama_obat: "Dextromethorphan HBr",
     tipe: "tablet",
     stok: 2,
     harga: 5000,
     // perluResep: false,
   },
   {
-    id_obat: B2,
-    nama_obat: "lansoprazole",
+    id_obat: 'D1',
+    nama_obat: "Paracetamol",
     tipe: "kapsul",
     stok: 10,
     harga: 3000,
     // perluResep: false,
   },
   {
-    id_obat: 3,
-    nama_obat: "enervon-C",
+    id_obat: 'S1',
+    nama_obat: "Enervon-C",
     tipe: "tablet",
     stok: 8,
     harga: 10000,
@@ -83,25 +83,62 @@ const table_obat = [
   },
 ];
 
+//Tambah Stok
+function tambahStockObat(tabel_obat, nama_obat, tipe) {
+  for (let value of tabel_obat) {
+    if (nama_obat == value.nama_obat && tipe == value.tipe) {
+      value.stok++;    
+    }
+  }
+  return tabel_obat;
+}
+
+//Logout User
+
 const table_admin = [
   {
-    username: joko1,
+    username: 'joko1',
     pass: "hacktiv8",
   },
 ];
 
-const table_keranjang = [];
+//Login User
+function loginUser(table_admin) {
+  let userName = 'joko1';
+  let pass = 'hacktiv8';
+  //Gagal login
+  if (!username) {
+    return 'Isi Username dulu!';
+  } else if (!pass) {
+    return 'Isi Password dulu!';
+  }
+  //Menuju Halaman Admin 
+  if (userName == table_admin.username && pass == table_admin.pass) {
+    return 'Selamat datang admin';
+  }
+}
 
-const table_pesanan = [
-  //awalnya kosong
-  {
-    id_pesanan: 01,
-    id_obat: [1, 2], //pakai array aja kali ya? pakai id referensi ke tabel_obat
-    nama_obat: ["nama1", "nama2"],
-    harga_obat: ["harga1", "harga2"],
-    total_harga: 8000, //totalin harga pakai id obat
-    nama_pembeli: "Acit",
-    nolep: 0819,
-    // buktiResepDokter: "gambar.png", //jika ada obat yg perlu resep dokter
-  },
-];
+//Logout User
+function logutUser() {
+  //Tombol sudah dipencet (Umpamanya)
+  let tombolLogout = true;
+  if (tombolLogout) {
+    //Kembali ke halaman utama
+  }
+}
+
+// const table_keranjang = [];
+
+// const table_pesanan = [
+//   //awalnya kosong
+//   {
+//     id_pesanan: 01,
+//     id_obat: [1, 2], //pakai array aja kali ya? pakai id referensi ke tabel_obat
+//     nama_obat: ["nama1", "nama2"],
+//     harga_obat: ["harga1", "harga2"],
+//     total_harga: 8000, //totalin harga pakai id obat
+//     nama_pembeli: "Acit",
+//     nolep: '081900000'
+//     // buktiResepDokter: "gambar.png", //jika ada obat yg perlu resep dokter
+//   },
+// ];
