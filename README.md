@@ -2,4 +2,4 @@
 
 You can use dummy account below for login to admin page:\
 username: acit\
-password: acit\
+password: acit
